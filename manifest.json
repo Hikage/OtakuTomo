@@ -1,0 +1,15 @@
+{
+  "name": "OtakuTomo",
+  "version": "1.0",
+  "manifest_version": 2,
+  
+  "description": "Easily find fansubs for all of your favorite anime",
+  
+  "browser_action": {
+    "default_icon": "tomo-256.png",
+    "_comment": "Image courtesy of http://calligraphernao.wordpress.com/2009/12/22/friend/",
+    "default_title": "OtakuTomo",
+    "default_popup": "popup.html"
+  },
+  "icons": { "16": "tomo-16.png", "128": "tomo-128.png" }
+}
