@@ -1,9 +1,13 @@
 {
   "name": "OtakuTomo",
-  "version": "1.0",
+  "version": "1.0",  
+  "description": "Easily find fansubs for all of your favorite anime",
+  
   "manifest_version": 2,
   
-  "description": "Easily find fansubs for all of your favorite anime",
+  "permissions": [
+  	"https://www.google.com/"
+  ],
   
   "browser_action": {
     "default_icon": "tomo-256.png",
