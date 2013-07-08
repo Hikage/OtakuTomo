@@ -10,9 +10,10 @@
  * TODO details on this class
  */
 
+/**
 var query = 'kittens';
 
-popupAction() {
+function popupAction() {
 	var cx = '018373880543266522285:-8rnpoqzrd8';
 	var gcse = document.createElement('script');
 	gcse.type = 'text/javascript';
@@ -21,8 +22,16 @@ popupAction() {
 		'//www.google.com/cse/cse.js?cx=' + cx;
 	var s = document.getElementsByTagName('script')[0];
 	s.parentNode.insertBefore(gcse, s);
-};
+}
 
+function clickHandler() {
+	var img = document.createElement('img');
+    img.src = "tomo-256.png";
+    img.setAttribute('alt', "Tomo256");
+    document.body.appendChild(img);
+    google.load('search','1');
+}
+**/
 		/**
 		searchOnGoogle_: 'https://www.googleapis.com/customsearch/v1?' +
 	      'method=flickr.photos.search&' +
@@ -84,8 +93,22 @@ requestKittens: function() {
   }
   **/
 
-
+/**
 // Run our kitten generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
-	popupAction();
+	//document.querySelector('sa').addEventListener('click', clickHandler);
+	//popupAction();
+	//https://www.google.com/#output=search&sclient=psy-ab&q=kittens
+	document.getElementById('click-me').addEventListener('click', clickHandler);
 });
+**/
+
+chrome.runtime.onMessage.addListener(
+		function(request, sender, sendResponse) {
+			if (request.method == "getSearchResults")
+				sendResponse({data: window.getSelection().toString()});
+			else
+				sendResponse({});	//do nothing
+		}
+);
+

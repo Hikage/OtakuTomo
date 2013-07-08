@@ -1,12 +1,24 @@
 {
   "name": "OtakuTomo",
-  "version": "1.0",  
+  "version": "1.0",
+  "author": [ {
+  	"name": "Brianna Shade",
+  	"email": "bshade@pdx.edu",
+  	"copyright": "Copyright © 2013",
+  	"license": "This program is licensed under the MIT License",
+  	"location": "Please see the file COPYING in the source distribution of this software for license terms."
+  } ],
+  
   "description": "Easily find fansubs for all of your favorite anime",
   
   "manifest_version": 2,
   
+  "background": { 
+    "scripts": ["popup.js", "background.js"] 
+  },
+  
   "permissions": [
-  	"https://www.google.com/"
+  	"tabs", "https://*.google.com/*"
   ],
   
   "browser_action": {
@@ -15,5 +27,10 @@
     "default_title": "OtakuTomo",
     "default_popup": "popup.html"
   },
-  "icons": { "16": "tomo-16.png", "128": "tomo-128.png" }
+  
+  "icons": {
+	"16": "tomo-16.png",
+	"128": "tomo-128.png",
+	"256": "tomo-256.png"
+  }
 }
