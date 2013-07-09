@@ -14,7 +14,7 @@
   "manifest_version": 2,
   
   "background": { 
-    "scripts": ["popup.js", "background.js"] 
+    "scripts": ["background.js"] 
   },
   
   "permissions": [

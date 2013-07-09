@@ -93,16 +93,18 @@ requestKittens: function() {
   }
   **/
 
-/**
+
 // Run our kitten generation script as soon as the document's DOM is ready.
-document.addEventListener('DOMContentLoaded', function () {
+//document.addEventListener('DOMContentLoaded', function(request, sender, sendResponse) {
 	//document.querySelector('sa').addEventListener('click', clickHandler);
 	//popupAction();
 	//https://www.google.com/#output=search&sclient=psy-ab&q=kittens
-	document.getElementById('click-me').addEventListener('click', clickHandler);
-});
-**/
-
+	//document.getElementById('click-me').addEventListener('click', clickHandler);
+//	if (request.method == "getSearchResults")
+//		sendResponse(function(){data: window.getSelection().toString();});
+//	else
+//		sendResponse(function(){});	//do nothing
+/**
 chrome.runtime.onMessage.addListener(
 		function(request, sender, sendResponse) {
 			if (request.method == "getSearchResults")
@@ -111,4 +113,16 @@ chrome.runtime.onMessage.addListener(
 				sendResponse({});	//do nothing
 		}
 );
+//});
+**/
+
+function clickHandler(e) {
+    chrome.extension.sendMessage({method: "getSearchResults"}, function(response){
+        this.close(); // close the popup when the background finishes processing request
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('submitbtn').addEventListener('click', clickHandler);
+});
 
