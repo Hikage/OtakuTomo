@@ -39,19 +39,17 @@ function newTab(tab){
 
 function onMessage(request, sender, sendResponse) {
 	if (request.method == "getSearchResults"){
-		var text = '';
-        if(window.getSelection){
-          text = window.getSelection();
-        }else if(document.getSelection){
-          text = document.getSelection();
-        }else if(document.selection){
-          text = document.selection.createRange().text;
-        }
-        text=text.toString();
-		sendResponse(sendServiceRequest("kitten"));
+		//var query = document.getElementById("searchtxt").toLocaleString();
+		//sendResponse(sendServiceRequest('kitten'));
+		chrome.tabs.getSelected(null, 
+				function(tab) { 
+					sendServiceRequest('kitten'); //window.getSelection().toString());
+				}
+		);
+		sendResponse({msg: "Query executed successfully"});
 	}
 	else
-		sendResponse({});	//do nothing
+		sendResponse({msg: "Request other than getSearchResults received: " + request.method});
 }
 
 chrome.extension.onMessage.addListener(onMessage);

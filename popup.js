@@ -117,9 +117,13 @@ chrome.runtime.onMessage.addListener(
 **/
 
 function clickHandler(e) {
-    chrome.extension.sendMessage({method: "getSearchResults"}, function(response){
-        this.close(); // close the popup when the background finishes processing request
-    });
+    chrome.extension.sendMessage(
+    		{method: "getSearchResults"},
+    		function(response){    	
+    			console.log(response.msg);
+    			//this.close(); 					//close the popup when the background finishes processing request
+    		}
+	);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
