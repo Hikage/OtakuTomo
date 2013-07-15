@@ -22,9 +22,10 @@ chrome.tabs.sendMessage(
 });
 **/
 
-function sendServiceRequest(inputText) {
+function sendServiceRequest(inputText, sendResponse) {
 	var searchURL = 'http://www.google.com/search?q=' + inputText;
 	chrome.tabs.create({url: searchURL});
+	sendResponse({msg: "Query executed successfully"});
 }
 
 function newTab(tab){
@@ -37,16 +38,17 @@ function newTab(tab){
 	);
 }
 
-function onMessage(request, sender, sendResponse) {
+function onMessage(request, sendResponse) {
+	var query = document.getElementById("textbox").value;
+	alert("Got: " + query);
+	
 	if (request.method == "getSearchResults"){
-		//var query = document.getElementById("searchtxt").toLocaleString();
-		//sendResponse(sendServiceRequest('kitten'));
-		chrome.tabs.getSelected(null, 
-				function(tab) { 
-					sendServiceRequest('kitten'); //window.getSelection().toString());
-				}
-		);
-		sendResponse({msg: "Query executed successfully"});
+		//var query = document.forms["s"]["q"].value;
+		//var query = window.getSelection().toString();
+		//sendServiceRequest(query, sendResponse);
+		//var query = document.forms.item(0);
+		var query = document.getElementById("textbox").value;
+		alert("Got: " + query);
 	}
 	else
 		sendResponse({msg: "Request other than getSearchResults received: " + request.method});

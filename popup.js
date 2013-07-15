@@ -116,17 +116,50 @@ chrome.runtime.onMessage.addListener(
 //});
 **/
 
-function clickHandler(e) {
+/**
+function onMessage(request, sendResponse) {
+	var query = document.getElementById("textbox").value;
+	sendResponse({msg: "Got: " + query});
+
+	if (request.method == "getSearchResults"){
+		//var query = document.forms["s"]["q"].value;
+		//var query = window.getSelection().toString();
+		//sendServiceRequest(query, sendResponse);
+		//var query = document.forms.item(0);
+		var query = document.getElementById("textbox").value;
+		alert("Got: " + query);
+	}
+	else
+		sendResponse({msg: "Request other than getSearchResults received: " + request.method});
+		
+}
+**/
+
+/**
+function clickHandler() {
     chrome.extension.sendMessage(
     		{method: "getSearchResults"},
     		function(response){    	
-    			console.log(response.msg);
+    			alert("test!");//response.msg);
     			//this.close(); 					//close the popup when the background finishes processing request
     		}
 	);
 }
+**/
+
+
+function clickHandler(){
+	var query = document.getElementById("textbox").value;
+	var searchURL = 'http://myanimelist.net/anime.php?q=' + query;
+	chrome.tabs.create({url: searchURL});
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('submitbtn').addEventListener('click', clickHandler);
+    //document.getElementById('submitbtn').addEventListener('click', clickHandler);
+    document.getElementById("submitbtn").onclick = clickHandler;
 });
+
+//chrome.extension.onMessage.addListener(onMessage);
+
+
 
