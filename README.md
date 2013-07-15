@@ -24,8 +24,9 @@ Once options have been determined, they will be presented to the user.
 ### Code Plan
 *  Basic:
   *  Establish extension (compl: 6/30)
-  *  User input support, presenting Google search results
-  *  Verify series against MAL, Wiki, or IMDB; user confirmation
+  *  User input support, presenting Google search results (compl: 7/15 - changed to My Anime List results)
+  *  Present multiple choice options for user
+  *  Extract search results and present as multiple choice for user confirmation
   *  Present top 5 URL results within extension popup
   *  Result tuning (only sites with valid videos, not matching other episodes of the series, etc)
 *  Website:
