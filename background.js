@@ -22,36 +22,10 @@ chrome.tabs.sendMessage(
 });
 **/
 
-function sendServiceRequest(inputText, sendResponse) {
-	var searchURL = 'http://www.google.com/search?q=' + inputText;
-	chrome.tabs.create({url: searchURL});
-	sendResponse({msg: "Query executed successfully"});
-}
+chrome.app.runtime.onLaunched.addListener(function() {
+	// TODO: Do stuff
+});
 
-function newTab(tab){
-	chrome.tabs.sendMessage(
-			tab.id,
-			{method: "getSearchResults"},
-			function(response){
-				sendServiceRequest(response.data);
-			}
-	);
-}
-
-function onMessage(request, sendResponse) {
-	var query = document.getElementById("textbox").value;
-	alert("Got: " + query);
-	
-	if (request.method == "getSearchResults"){
-		//var query = document.forms["s"]["q"].value;
-		//var query = window.getSelection().toString();
-		//sendServiceRequest(query, sendResponse);
-		//var query = document.forms.item(0);
-		var query = document.getElementById("textbox").value;
-		alert("Got: " + query);
-	}
-	else
-		sendResponse({msg: "Request other than getSearchResults received: " + request.method});
-}
-
-chrome.extension.onMessage.addListener(onMessage);
+chrome.runtime.onSuspend.addListener(function() { 
+	// TODO: Do some simple clean-up tasks.
+});

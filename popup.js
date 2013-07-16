@@ -155,7 +155,6 @@ function clickHandler(){
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    //document.getElementById('submitbtn').addEventListener('click', clickHandler);
     document.getElementById("submitbtn").onclick = clickHandler;
 });
 
