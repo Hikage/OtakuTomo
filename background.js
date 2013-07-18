@@ -10,22 +10,20 @@
  * TODO details on this class
  */
 
-/**
-chrome.browserAction.onClicked.addListener(function(tab) {
-chrome.tabs.sendMessage(
-		tab.id,
-		{method: "getSearchResults"},
-		function(response){
-			sendServiceRequest(response.data);
-		}
-);
-});
-**/
 
-chrome.app.runtime.onLaunched.addListener(function() {
-	// TODO: Do stuff
+function clickHandler(){
+	alert("Reached clickHandler");
+	//var query = document.getElementById("textbox").value;
+	//var searchURL = 'http://myanimelist.net/anime.php?q=' + query;
+	//chrome.windows.create({'url': 'http://myanimelist.net/'});
+}
+
+chrome.app.runtime.onLaunched.addListener(function () {
+	chrome.app.window.create('OtakuTomo.html');
+	//alert("Do something!");
+    document.getElementById("submitbtn").onclick = clickHandler;
 });
 
-chrome.runtime.onSuspend.addListener(function() { 
+//chrome.runtime.onSuspend.addListener(function() { 
 	// TODO: Do some simple clean-up tasks.
-});
+//});
