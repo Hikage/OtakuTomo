@@ -6,7 +6,7 @@ Portland State University
 This program is licensed under the "MIT License"  
 Please see the file COPYING in the source distribution of this software for license terms.
 
-*Disclaimer: This code is in the early stages of development and is not yet complete or functional*
+*Disclaimer: This code is in the early stages of development and is not yet complete or functional (see Code Plan below for estimated progress)*
   
   
 ### About
@@ -47,4 +47,4 @@ Once options have been determined, they will be presented to the user.
 MIT license available at http://opensource.org/licenses/MIT and within COPYING
   
 ------------------------
-*Last updated: 6/30/13*
+*Last updated: 7/22/13*
