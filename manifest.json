@@ -18,7 +18,7 @@
   },
   
   "permissions": [
-  	"tabs", "https://*.google.com/*"
+  	"tabs", "http://*.myanimelist.net/*"
   ],
   
   "browser_action": {

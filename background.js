@@ -10,18 +10,6 @@
  * TODO details on this class
  */
 
-/**
-chrome.browserAction.onClicked.addListener(function(tab) {
-chrome.tabs.sendMessage(
-		tab.id,
-		{method: "getSearchResults"},
-		function(response){
-			sendServiceRequest(response.data);
-		}
-);
-});
-**/
-
 function sendServiceRequest(inputText, sendResponse) {
 	var searchURL = 'http://www.google.com/search?q=' + inputText;
 	chrome.tabs.create({url: searchURL});
@@ -43,10 +31,6 @@ function onMessage(request, sendResponse) {
 	alert("Got: " + query);
 	
 	if (request.method == "getSearchResults"){
-		//var query = document.forms["s"]["q"].value;
-		//var query = window.getSelection().toString();
-		//sendServiceRequest(query, sendResponse);
-		//var query = document.forms.item(0);
 		var query = document.getElementById("textbox").value;
 		alert("Got: " + query);
 	}
