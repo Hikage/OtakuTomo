@@ -10,19 +10,12 @@
  * TODO details on this class
  */
 
-function getResults(searchURL){
-	//chrome.tabs.create({url: searchURL});
-
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', searchURL);
-	xhr.overrideMimeType('text/xml');
-	xhr.send(null);
-	
+function processResults(resp){	
 	var htmlHead = "<head><title>OtakuTomo Search Results</title></head>";
 	
-	var root = xhr.responseXML;
-	var results = root;
-	var htmlBody = "<body>" + results + "</body>";
+	//var root = request.responseXML;
+	//var results = root;
+	var htmlBody = "<body>" + resp + "</body>";
 	
 	var htmlCode = "<html>" + htmlHead + htmlBody + "</html>";
 	var url = "data:text/html," + encodeURIComponent(htmlCode);
@@ -32,6 +25,30 @@ function getResults(searchURL){
 	//chrome.tabs.create({url: chrome.extension.getURL('results.html')});
 	//var pics = root.getElementsByTagName("image");
 	//chrome.tabs.create({url: 'http://cdn.myanimelist.net/images/anime/6/7632.jpg'});
+}
+
+function getResults(searchURL){
+	//chrome.tabs.create({url: searchURL});
+
+	var request = new XMLHttpRequest();
+	if (request == null){
+        processResults("Unable to create request");
+    }
+	else{
+		request.open("GET", searchURL, true);
+		
+		request.onreadystatechange = function(){
+			if(request.readyState == 4){
+				//if (request.status == 200) {
+					//processResults("Sending stuff...");
+					processResults(request.status);
+				//}
+			}
+		};
+		
+		//request.overrideMimeType('text/xml');
+        request.send();
+	}
 }
 
 function clickHandler(){
