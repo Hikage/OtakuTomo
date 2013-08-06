@@ -41,7 +41,7 @@ function getResults(searchURL){
 			if(request.readyState == 4){
 				//if (request.status == 200) {
 					//processResults("Sending stuff...");
-					processResults(request.status);
+					processResults(request.status + " " + searchURL);
 				//}
 			}
 		};
@@ -57,7 +57,11 @@ function clickHandler(){
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById("submitbtn").onclick = clickHandler;
+    //document.getElementById('textbox').onkeypress = function(event){
+    //	if(event.keyCode==13) document.getElementById('submitbtn').click();
+    //};
+    document.getElementById("form").onsubmit = clickHandler;
+    //document.getElementById("box").action = clickHandler;
 });
 
 
