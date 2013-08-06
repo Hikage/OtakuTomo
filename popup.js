@@ -39,10 +39,13 @@ function getResults(searchURL){
 		
 		request.onreadystatechange = function(){
 			if(request.readyState == 4){
-				//if (request.status == 200) {
+				if(request.status == 0){
+					processResults("Sorry, request status came back as zero :(");
+				}
+				if (request.status == 200) {
 					//processResults("Sending stuff...");
 					processResults(request.status + " " + searchURL);
-				//}
+				}
 			}
 		};
 		
@@ -51,9 +54,10 @@ function getResults(searchURL){
 	}
 }
 
-function clickHandler(){
+function clickHandler(event){
 	var query = document.getElementById("textbox").value;
 	getResults('http://myanimelist.net/api/anime/search.xml?q=' + query);
+	event.preventDefault();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
