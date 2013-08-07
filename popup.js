@@ -13,9 +13,12 @@
 function processResults(resp){	
 	var htmlHead = "<head><title>OtakuTomo Search Results</title></head>";
 	
-	//var root = request.responseXML;
-	//var results = root;
-	var htmlBody = "<body>" + resp + "</body>";
+	var nodes = resp.getElementsByTagName('title');
+	var results = "";
+	for(var i=0; i < nodes.length; i++){
+		results += nodes[i].nodeName;
+	}
+	var htmlBody = "<body>" + results + "</body>";
 	
 	var htmlCode = "<html>" + htmlHead + htmlBody + "</html>";
 	var url = "data:text/html," + encodeURIComponent(htmlCode);
@@ -42,30 +45,28 @@ function getResults(searchURL){
 				if(request.status == 0){
 					processResults("Sorry, request status came back as zero :(");
 				}
-				if (request.status == 200) {
-					//processResults("Sending stuff...");
-					processResults(request.status + " " + searchURL);
+				if(request.status == 200){
+					processResults(request.responseXML);
+				}
+				if(request.status == 204){
+					processResults("No results found");
 				}
 			}
 		};
 		
-		//request.overrideMimeType('text/xml');
+		request.overrideMimeType('text/xml');
         request.send();
 	}
 }
 
-function clickHandler(event){
+function submitHandler(event){
 	var query = document.getElementById("textbox").value;
 	getResults('http://myanimelist.net/api/anime/search.xml?q=' + query);
 	event.preventDefault();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    //document.getElementById('textbox').onkeypress = function(event){
-    //	if(event.keyCode==13) document.getElementById('submitbtn').click();
-    //};
-    document.getElementById("form").onsubmit = clickHandler;
-    //document.getElementById("box").action = clickHandler;
+    document.getElementById("form").onsubmit = submitHandler;
 });
 
 
