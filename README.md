@@ -1,12 +1,13 @@
 ![Alt text](https://github.com/Hikage/OtakuTomo/blob/master/tomo-128.png?raw=true) OtakuTomo
 =========
 Copyright © 2013 Brianna Shade  
+bshade@pdx.edu  
 Portland State University
   
 This program is licensed under the "MIT License"  
 Please see the file COPYING in the source distribution of this software for license terms.
 
-*Disclaimer: This code is in the early stages of development and is not yet complete or functional*
+*Disclaimer: This code is in the early stages of development and is not yet complete or functional (see Code Plan below for estimated progress)*
   
   
 ### About
@@ -19,6 +20,8 @@ This Chrome extension is designed to be an otaku (fan) tomo (friend), aiding in 
 Users will also be able to contribute to ratings based on experiences, improving accuracy with future recommendations.
 
 Once options have been determined, they will be presented to the user.
+
+Code available at https://github.com/Hikage/OtakuTomo
   
   
 ### Code Plan
@@ -47,4 +50,4 @@ Once options have been determined, they will be presented to the user.
 MIT license available at http://opensource.org/licenses/MIT and within COPYING
   
 ------------------------
-*Last updated: 6/30/13*
+*Last updated: 8/5/13*

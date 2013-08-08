@@ -22,7 +22,7 @@
   },  
   
   "permissions": [
-  	"https://*.myanimelist.net/*"
+  	"tabs", "http://*.myanimelist.net/*", "https://*.myanimelist.net/*", "*://*/*"
   ],
   
   "icons": {

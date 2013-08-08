@@ -10,6 +10,11 @@
  * TODO details on this class
  */
 
+function sendServiceRequest(inputText, sendResponse) {
+	var searchURL = 'http://www.google.com/search?q=' + inputText;
+	chrome.tabs.create({url: searchURL});
+	sendResponse({msg: "Query executed successfully"});
+}
 
 function clickHandler(){
 	alert("Reached clickHandler");
@@ -18,11 +23,17 @@ function clickHandler(){
 	//chrome.windows.create({'url': 'http://myanimelist.net/'});
 }
 
-chrome.app.runtime.onLaunched.addListener(function () {
-	chrome.app.window.create('OtakuTomo.html');
-	//alert("Do something!");
-    document.getElementById("submitbtn").onclick = clickHandler;
-});
+function onMessage(request, sendResponse) {
+	var query = document.getElementById("textbox").value;
+	alert("Got: " + query);
+	
+	if (request.method == "getSearchResults"){
+		var query = document.getElementById("textbox").value;
+		alert("Got: " + query);
+	}
+	else
+		sendResponse({msg: "Request other than getSearchResults received: " + request.method});
+}
 
 //chrome.runtime.onSuspend.addListener(function() { 
 	// TODO: Do some simple clean-up tasks.
