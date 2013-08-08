@@ -10,24 +10,30 @@
  * TODO details on this class
  */
 
-function processResults(resp){	
+function displayResults(results){	
 	var htmlHead = "<head><title>OtakuTomo Search Results</title></head>";
-	
-	var nodes = resp.getElementsByTagName("title");
-	var results = "";
-	for(var i=0; i < nodes.length; i++){
-		results += nodes[i].childNodes[0].nodeValue + "<br>";
-	}
 	var htmlBody = "<body>" + results + "</body>";
 	
 	var htmlCode = "<html>" + htmlHead + htmlBody + "</html>";
 	var url = "data:text/html," + encodeURIComponent(htmlCode);
 	
 	chrome.tabs.create({url: url});
+}
+
+function processResults(resp){	
+	var nodes = resp.getElementsByTagName("entry");
+	var results = "";
+	for(var i=0; i < nodes.length; i++){
+		var title = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+		var imgurl = nodes[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+		var id = nodes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+		
+		results += "\n<div><b>" + title + "</b></div>";
+		results += '\n<a href=\'http://myanimelist.net/anime/' + id + '\'><img src=\'' + imgurl + '\'/></a>';
+		results += "<br><br>";
+	}
 	
-	//chrome.tabs.create({url: chrome.extension.getURL('results.html')});
-	//var pics = root.getElementsByTagName("image");
-	//chrome.tabs.create({url: 'http://cdn.myanimelist.net/images/anime/6/7632.jpg'});
+	displayResults(results);
 }
 
 function getResults(searchURL){
@@ -43,13 +49,13 @@ function getResults(searchURL){
 		request.onreadystatechange = function(){
 			if(request.readyState == 4){
 				if(request.status == 0){
-					processResults("Sorry, request status came back as zero :(");
+					displayResults("Sorry, request status came back as zero :(");
 				}
 				if(request.status == 200){
 					processResults(request.responseXML);
 				}
 				if(request.status == 204){
-					processResults("No results found");
+					displayResults("No results found");
 				}
 			}
 		};
