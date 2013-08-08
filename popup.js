@@ -13,10 +13,10 @@
 function processResults(resp){	
 	var htmlHead = "<head><title>OtakuTomo Search Results</title></head>";
 	
-	var nodes = resp.getElementsByTagName('title');
+	var nodes = resp.getElementsByTagName("title");
 	var results = "";
 	for(var i=0; i < nodes.length; i++){
-		results += nodes[i].nodeName;
+		results += nodes[i].childNodes[0].nodeValue + "<br>";
 	}
 	var htmlBody = "<body>" + results + "</body>";
 	
@@ -54,18 +54,18 @@ function getResults(searchURL){
 			}
 		};
 		
-		request.overrideMimeType('text/xml');
+		request.overrideMimeType("text/xml");
         request.send();
 	}
 }
 
 function submitHandler(event){
 	var query = document.getElementById("textbox").value;
-	getResults('http://myanimelist.net/api/anime/search.xml?q=' + query);
+	getResults("http://myanimelist.net/api/anime/search.xml?q=" + query);
 	event.preventDefault();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("form").onsubmit = submitHandler;
 });
 
