@@ -21,7 +21,7 @@ Users will also be able to contribute to ratings based on experiences, improving
 
 Once options have been determined, they will be presented to the user.
 
-Code available at https://github.com/Hikage/OtakuTomo
+Most recent stable code available at https://github.com/Hikage/OtakuTomo on master
   
   
 ### Code Plan
