@@ -67,8 +67,11 @@ function getResults(searchURL){
 
 function submitHandler(event){
 	var query = document.getElementById("textbox").value;
-	getResults("http://myanimelist.net/api/anime/search.xml?q=" + query);
-	event.preventDefault();
+	if(query == "Enter anime title");
+	else{
+		getResults("http://myanimelist.net/api/anime/search.xml?q=" + query);
+		event.preventDefault();
+	}
 }
 
 document.addEventListener("DOMContentLoaded", function () {
