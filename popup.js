@@ -48,14 +48,12 @@ function getResults(searchURL){
 		
 		request.onreadystatechange = function(){
 			if(request.readyState == 4){
-				if(request.status == 0){
-					displayResults("Sorry, request status came back as zero :(");
-				}
-				if(request.status == 200){
-					processResults(request.responseXML);
-				}
-				if(request.status == 204){
-					displayResults("No results found");
+				switch(request.status){
+				case 200: processResults(request.responseXML); break;
+				case 204: displayResults("No results found"); break;
+				case 0: displayResults("Sorry, request status came back as zero :("); break;
+				case 401: displayResults("Not correctly logged in"); break;
+				default: displayResults("Unknown request status: " + request.status);
 				}
 			}
 		};
@@ -69,7 +67,7 @@ function submitHandler(event){
 	var query = document.getElementById("textbox").value;
 	if(query == "Enter anime title");
 	else{
-		getResults("http://myanimelist.net/api/anime/search.xml?q=" + query);
+		getResults("http://otakutomo:hikage@myanimelist.net/api/anime/search.xml?q=" + query);
 		event.preventDefault();
 	}
 }

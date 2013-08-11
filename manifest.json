@@ -13,17 +13,20 @@
   
   "manifest_version": 2,
   
-  "app":{
-	"background": {
-		"scripts": [
-			"background.js"
-		]
-  	}
-  },  
+  "background": { 
+    "scripts": ["background.js"] 
+  },
   
   "permissions": [
   	"tabs", "http://*.myanimelist.net/*", "https://*.myanimelist.net/*", "*://*/*"
   ],
+  
+  "browser_action": {
+    "default_icon": "tomo-256.png",
+    "_comment": "Image courtesy of http://calligraphernao.wordpress.com/2009/12/22/friend/",
+    "default_title": "OtakuTomo",
+    "default_popup": "popup.html"
+  },
   
   "icons": {
 	"16": "tomo-16.png",
