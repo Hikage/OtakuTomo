@@ -22,7 +22,6 @@ function displayResults(body, results){
 
 function processResults(resp){	
 	var nodes = resp.getElementsByTagName("entry");
-	displayResults("Got here");
 	var results = "";
 	if(nodes == null){
 		displayResults("Element \"entry\" does not exist");
@@ -42,48 +41,52 @@ function processResults(resp){
 	}
 }
 
-function delayer(query){
-    window.location = "http://myanimelist.net/anime.php?q=" + query;
+/**
+function delayer(){
+    chrome.tabs.update({url: "http://myanimelist.net/"}); //anime.php?q=" + query);
+	//var url = "http://myanimelist.net/";
+	//chrome.tabs.create({url: url});
 }
+**/
 
 function getResults(query){
 	var searchURL = "http://otakutomo:hikage@myanimelist.net/api/anime/search.xml?q=" + query;
-	var request = new XMLHttpRequest();
-	var body = "<body";
+	var body = "<body>";
 	var pgtxt = "";
 	
+	var request = new XMLHttpRequest();
 	if (request == null){
-        pgtxt = "Unable to create request: " + searchURL;
-    }	
+        displayResults(body, "Unable to create request");
+    }
 	else{
 		request.open("GET", searchURL, true);
 		
-		//request.overrideMimeType("text/xml");
-        request.send();
-		
 		request.onreadystatechange = function(){
 			if(request.readyState == 4){
-				switch(request.status){
-				case 200: pgtxt = processResults(request); break;
-				case 204: pgtxt = "No results found"; break;
-				case 0: pgtxt = "Sorry, request status came back as zero :("; break;
-				case 401: pgtxt = "Not correctly logged in"; break;
-				default: pgtxt = "Unknown request status: " + request.status;
+				if(request.responseXML == null && request.responseText != ""){
+					//body = "<body onLoad=\"setTimeout('delayer()', 1000)\">";
+					pgtxt = "Sorry, response data was not correctly formatted.  Redirecting...";
+					//setTimeout(5000);
+					setTimeout(function() {chrome.extension.sendRequest({redirect: "http://myanimelist.net/"});}, 1000);
+				}				
+				else{
+					switch(request.status){
+					case 200: pgtxt = processResults(request.responseXML); break;
+					case 204: pgtxt = "No results found for: " + query; break;
+					case 0: pgtxt = "Sorry, request status came back as zero :("; break;
+					case 401: pgtxt = "Not correctly logged in"; break;
+					default: pgtxt = "Unknown request status: " + request.status;
+					}
 				}
-			}
-			else{
-				pgtxt = "Unknown readyState: " + request.readyState;
+				
+				displayResults(body, pgtxt);
 			}
 		};
+		
+		request.overrideMimeType("text/xml");
+        request.send();
 	}
 	
-	if(request.responseXML == null){
-		pgtxt = "Sorry, but the response data was not well-formed.  Redirecting...";
-		body += "onLoad=\"setTimeout('delayer(" + query + ")', 5000)\"";
-	}
-	
-	body += ">";
-	displayResults(body, pgtxt);
 }
 
 function submitHandler(event){
