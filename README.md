@@ -46,7 +46,7 @@ Most recent stable code available at https://github.com/Hikage/OtakuTomo on mast
   
   
 ### License and Sharing
-MIT license available at http://opensource.org/licenses/MIT and within COPYING
+Full MIT license details available within COPYING
   
 ------------------------
-*Last updated: 8/5/13*
+*Last updated: 8/11/13*
