@@ -10,9 +10,9 @@
  * TODO details on this class
  */
 
-function displayResults(results){	
+function displayResults(body, results){	
 	var htmlHead = "<head><title>OtakuTomo Search Results</title></head>";
-	var htmlBody = "<body>" + results + "</body>";
+	var htmlBody = body + results + "</body>";
 	
 	var htmlCode = "<html>" + htmlHead + htmlBody + "</html>";
 	var url = "data:text/html," + encodeURIComponent(htmlCode);
@@ -22,52 +22,75 @@ function displayResults(results){
 
 function processResults(resp){	
 	var nodes = resp.getElementsByTagName("entry");
+	displayResults("Got here");
 	var results = "";
-	for(var i=0; i < nodes.length; i++){
-		var title = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
-		var imgurl = nodes[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
-		var id = nodes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
-		
-		results += "\n<div><b>" + title + "</b></div>";
-		results += '\n<a href=\'http://myanimelist.net/anime/' + id + '\'><img src=\'' + imgurl + '\'/></a>';
-		results += "<br><br>";
+	if(nodes == null){
+		displayResults("Element \"entry\" does not exist");
 	}
-	
-	displayResults(results);
+	else{
+		for(var i = 0; i < nodes.length; i++){
+			var title = nodes[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+			var imgurl = nodes[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+			var id = nodes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+			
+			results += "\n<div><b>" + title + "</b></div>";
+			results += '\n<a href=\'http://myanimelist.net/anime/' + id + '\'><img src=\'' + imgurl + '\'/></a>';
+			results += "<br><br>";
+		}
+		
+		return results;
+	}
 }
 
-function getResults(searchURL){
-	//chrome.tabs.create({url: searchURL});
+function delayer(query){
+    window.location = "http://myanimelist.net/anime.php?q=" + query;
+}
 
+function getResults(query){
+	var searchURL = "http://otakutomo:hikage@myanimelist.net/api/anime/search.xml?q=" + query;
 	var request = new XMLHttpRequest();
+	var body = "<body";
+	var pgtxt = "";
+	
 	if (request == null){
-        processResults("Unable to create request");
-    }
+        pgtxt = "Unable to create request: " + searchURL;
+    }	
 	else{
 		request.open("GET", searchURL, true);
+		
+		//request.overrideMimeType("text/xml");
+        request.send();
 		
 		request.onreadystatechange = function(){
 			if(request.readyState == 4){
 				switch(request.status){
-				case 200: processResults(request.responseXML); break;
-				case 204: displayResults("No results found"); break;
-				case 0: displayResults("Sorry, request status came back as zero :("); break;
-				case 401: displayResults("Not correctly logged in"); break;
-				default: displayResults("Unknown request status: " + request.status);
+				case 200: pgtxt = processResults(request); break;
+				case 204: pgtxt = "No results found"; break;
+				case 0: pgtxt = "Sorry, request status came back as zero :("; break;
+				case 401: pgtxt = "Not correctly logged in"; break;
+				default: pgtxt = "Unknown request status: " + request.status;
 				}
 			}
+			else{
+				pgtxt = "Unknown readyState: " + request.readyState;
+			}
 		};
-		
-		request.overrideMimeType("text/xml");
-        request.send();
 	}
+	
+	if(request.responseXML == null){
+		pgtxt = "Sorry, but the response data was not well-formed.  Redirecting...";
+		body += "onLoad=\"setTimeout('delayer(" + query + ")', 5000)\"";
+	}
+	
+	body += ">";
+	displayResults(body, pgtxt);
 }
 
 function submitHandler(event){
 	var query = document.getElementById("textbox").value;
-	if(query == "Enter anime title");
+	if(query == "Enter anime title" || query == "");
 	else{
-		getResults("http://otakutomo:hikage@myanimelist.net/api/anime/search.xml?q=" + query);
+		getResults(query);
 		event.preventDefault();
 	}
 }
