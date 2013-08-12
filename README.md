@@ -28,9 +28,8 @@ Most recent stable code available at https://github.com/Hikage/OtakuTomo on mast
 *  Basic:
   *  Establish extension (compl: 6/30)
   *  User input support, presenting Google search results (compl: 7/15 - changed to My Anime List results)
-  *  Present multiple choice options for user
-  *  Extract search results and present as multiple choice for user confirmation
-  *  Present top 5 URL results within extension popup
+  *  Extract search results and present as multiple choice for user confirmation (compl: 8/7)
+  *  Present top 5 fansub URL results within extension popup
   *  Result tuning (only sites with valid videos, not matching other episodes of the series, etc)
 *  Website:
   *  Establish website with database back-end to store site stats and rankings for improved search results
