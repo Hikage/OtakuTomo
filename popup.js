@@ -41,13 +41,12 @@ function processResults(resp){
 	}
 }
 
-/**
-function delayer(){
-    chrome.tabs.update({url: "http://myanimelist.net/"}); //anime.php?q=" + query);
-	//var url = "http://myanimelist.net/";
-	//chrome.tabs.create({url: url});
+
+function redirect(query){
+	var url = "http://myanimelist.net/anime.php?q=" + query;
+    chrome.extension.sendRequest({redirect: url});
 }
-**/
+
 
 function getResults(query){
 	var searchURL = "http://otakutomo:hikage@myanimelist.net/api/anime/search.xml?q=" + query;
@@ -66,8 +65,7 @@ function getResults(query){
 				if(request.responseXML == null && request.responseText != ""){
 					//body = "<body onLoad=\"setTimeout('delayer()', 1000)\">";
 					pgtxt = "Sorry, response data was not correctly formatted.  Redirecting...";
-					//setTimeout(5000);
-					setTimeout(function() {chrome.extension.sendRequest({redirect: "http://myanimelist.net/"});}, 1000);
+					setTimeout(redirect(query), 5000);
 				}				
 				else{
 					switch(request.status){
