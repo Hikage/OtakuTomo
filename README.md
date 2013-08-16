@@ -25,7 +25,7 @@ Most recent stable code available at https://github.com/Hikage/OtakuTomo on mast
   
 
 ### Build Instructions
-1. Download the most recent code from the GitHub location above into a directory on your local machine
+1. Check out the most recent code from the GitHub location above into a directory on your local machine
 2. Within Chrome (version 19 or above), go to Tools -> Extensions from Chrome's "control" button, or navigate to chrome://extensions
 3. Be sure "Developer Mode" is selected, then click "Load Unpacked Extension"
 4. Choose the directory containing the source code
