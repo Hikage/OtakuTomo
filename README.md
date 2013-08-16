@@ -25,11 +25,11 @@ Most recent stable code available at https://github.com/Hikage/OtakuTomo on mast
   
 
 ### Build Instructions
-# Download the most recent code from the GitHub location above into a directory on your local machine
-# Within Chrome (version 19 or above), go to Tools -> Extensions from Chrome's "control" button, or navigate to chrome://extensions
-# Be sure "Developer Mode" is selected, then click "Load Unpacked Extension"
-# Choose the directory containing the source code
-# You will now have a new icon next to your omnibar - a smaller version of the "tomo" icon in this README document.  The extension is set and ready to use.  When making changes with the source code, be sure to "Reload" the extension on this page to apply the changes
+1. Download the most recent code from the GitHub location above into a directory on your local machine
+2. Within Chrome (version 19 or above), go to Tools -> Extensions from Chrome's "control" button, or navigate to chrome://extensions
+3. Be sure "Developer Mode" is selected, then click "Load Unpacked Extension"
+4. Choose the directory containing the source code
+5. You will now have a new icon next to your omnibar - a smaller version of the "tomo" icon in this README document.  The extension is set and ready to use.  When making changes with the source code, be sure to "Reload" the extension on this page to apply the changes
 
   
 ### Code Plan
