@@ -66,6 +66,7 @@ This project is currently facing several challenges:
 
 ### Currently Working On / Next Steps
 *  Redirect page for bad XML data returned by MAL - currently bypasses initial notification page and goes straight to MAL
+*  Dynamically fill in HTML form (results.html) instead of constructing the raw HTML code on the fly (cleaner URL, better control, etc)
 *  Tie user selection into a fansub site search, instead of simply directing to the MAL page
 
   
